@@ -1,0 +1,39 @@
+{
+  "common": {
+    "add": "新增",
+    "save": "儲存",
+    "cancel": "取消",
+    "delete": "刪除",
+    "edit": "編輯",
+    "income": "收入",
+    "expense": "支出",
+    "amount": "金額",
+    "category": "類別",
+    "date": "日期",
+    "account": "帳戶",
+    "currency": "幣別",
+    "settings": "設定"
+  },
+  "accounts": {
+    "cash": "現金",
+    "bank": "銀行",
+    "card": "卡片"
+  },
+  "categories": {
+    "food": "飲食",
+    "transport": "交通",
+    "shopping": "購物",
+    "entertainment": "娛樂",
+    "health": "健康",
+    "other": "其他"
+  },
+  "settings": {
+    "language": "語言",
+    "defaultCurrency": "預設幣別",
+    "theme": "主題"
+  },
+  "home": {
+    "totalBalance": "總餘額",
+    "recentTransactions": "最近交易"
+  }
+}

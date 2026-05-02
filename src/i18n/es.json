@@ -1,0 +1,39 @@
+{
+  "common": {
+    "add": "Añadir",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "income": "Ingreso",
+    "expense": "Gasto",
+    "amount": "Cantidad",
+    "category": "Categoría",
+    "date": "Fecha",
+    "account": "Cuenta",
+    "currency": "Moneda",
+    "settings": "Ajustes"
+  },
+  "accounts": {
+    "cash": "Efectivo",
+    "bank": "Banco",
+    "card": "Tarjeta"
+  },
+  "categories": {
+    "food": "Comida",
+    "transport": "Transporte",
+    "shopping": "Compras",
+    "entertainment": "Entretenimiento",
+    "health": "Salud",
+    "other": "Otro"
+  },
+  "settings": {
+    "language": "Idioma",
+    "defaultCurrency": "Moneda predeterminada",
+    "theme": "Tema"
+  },
+  "home": {
+    "totalBalance": "Saldo total",
+    "recentTransactions": "Transacciones recientes"
+  }
+}

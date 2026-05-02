@@ -1,0 +1,39 @@
+{
+  "common": {
+    "add": "Add",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "income": "Income",
+    "expense": "Expense",
+    "amount": "Amount",
+    "category": "Category",
+    "date": "Date",
+    "account": "Account",
+    "currency": "Currency",
+    "settings": "Settings"
+  },
+  "accounts": {
+    "cash": "Cash",
+    "bank": "Bank",
+    "card": "Card"
+  },
+  "categories": {
+    "food": "Food",
+    "transport": "Transport",
+    "shopping": "Shopping",
+    "entertainment": "Entertainment",
+    "health": "Health",
+    "other": "Other"
+  },
+  "settings": {
+    "language": "Language",
+    "defaultCurrency": "Default Currency",
+    "theme": "Theme"
+  },
+  "home": {
+    "totalBalance": "Total Balance",
+    "recentTransactions": "Recent Transactions"
+  }
+}

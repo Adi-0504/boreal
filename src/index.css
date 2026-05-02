@@ -1,0 +1,149 @@
+:root {
+  --bg-primary: #1F3D3B;
+  --surface: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.08);
+  --text-primary: #F4F7F6;
+  --text-secondary: #8A8F8E;
+  --accent: #5C7F7C;
+  --glass-blur: blur(12px);
+  --transition-speed: 0.3s;
+  --easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.glass {
+  background: var(--surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.glass-card {
+  background: var(--surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: 20px;
+  transition: transform var(--transition-speed) var(--easing), opacity var(--transition-speed) var(--easing);
+}
+
+.btn {
+  background: var(--accent);
+  color: var(--text-primary);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-speed) var(--easing);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.btn-secondary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+input, select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+  width: 100%;
+  transition: border-color var(--transition-speed) var(--easing);
+}
+
+input:focus, select:focus {
+  border-color: var(--accent);
+}
+
+::placeholder {
+  color: var(--text-secondary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-speed) var(--easing) forwards;
+}
+
+/* Seasonal/Environmental Backgrounds (Subtle) */
+.bg-evolve {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: var(--bg-primary);
+  transition: background 2s ease;
+  overflow: hidden;
+}
+
+.bg-evolve::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, var(--accent) 0%, transparent 70%);
+  opacity: 0.1;
+  animation: breathe 15s infinite ease-in-out;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.05; }
+  50% { transform: scale(1.1); opacity: 0.15; }
+}
+
+.theme-dawn { --bg-primary: #2C3E50; --accent: #E67E22; }
+.theme-morning { --bg-primary: #1F3D3B; --accent: #5C7F7C; }
+.theme-noon { --bg-primary: #2980B9; --accent: #F1C40F; }
+.theme-dusk { --bg-primary: #2C3E50; --accent: #8E44AD; }
+.theme-night { --bg-primary: #161616; --accent: #2C3E50; }
