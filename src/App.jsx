@@ -133,9 +133,9 @@ function App() {
             <div className="glass-card fade-in" style={{ marginBottom: '2rem', padding: 0, overflow: 'hidden' }}>
               <div style={{ display: 'flex', overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }} className="hide-scrollbar">
                 <div style={{ flex: '0 0 100%', scrollSnapAlign: 'start', padding: '1.5rem', textAlign: 'center' }}>
-                  <p className="text-secondary">{t('home.totalBalance')}</p>
+                  <p className="text-secondary">{t('home.totalExpenses') || '總花費'}</p>
                   <h2 style={{ fontSize: '2.5rem', fontWeight: '700', marginTop: '0.5rem' }}>
-                    {formatCurrency(transactions.reduce((acc, tx) => acc + (tx.type === 'income' ? tx.amount : -tx.amount), 0), localStorage.getItem('app_currency') || 'TWD')}
+                    {formatCurrency(transactions.reduce((acc, tx) => acc + (tx.type === 'expense' ? tx.amount : 0), 0), localStorage.getItem('app_currency') || 'TWD')}
                   </h2>
                 </div>
                 <div style={{ flex: '0 0 100%', scrollSnapAlign: 'start', padding: '1.5rem', textAlign: 'center' }}>

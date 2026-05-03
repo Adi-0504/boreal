@@ -33,7 +33,7 @@
     "theme": "Theme"
   },
   "home": {
-    "totalBalance": "Total Balance",
+    "totalExpenses": "Total Expenses",
     "recentTransactions": "Recent Transactions",
     "weeklyExpenses": "Weekly Expenses",
     "monthlyExpenses": "Monthly Expenses"

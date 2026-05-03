@@ -33,7 +33,7 @@
     "theme": "主題"
   },
   "home": {
-    "totalBalance": "總餘額",
+    "totalExpenses": "總花費",
     "recentTransactions": "最近交易",
     "weeklyExpenses": "本週花費",
     "monthlyExpenses": "本月花費"
