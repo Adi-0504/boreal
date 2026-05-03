@@ -154,3 +154,7 @@ input:focus, select:focus {
   --text-primary: #D0DAE8;
   color: var(--text-primary);
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

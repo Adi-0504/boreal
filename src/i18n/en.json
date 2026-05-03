@@ -34,6 +34,8 @@
   },
   "home": {
     "totalBalance": "Total Balance",
-    "recentTransactions": "Recent Transactions"
+    "recentTransactions": "Recent Transactions",
+    "weeklyExpenses": "Weekly Expenses",
+    "monthlyExpenses": "Monthly Expenses"
   }
 }

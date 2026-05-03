@@ -26,6 +26,31 @@ function App() {
     localStorage.setItem('night_mode', newVal);
   };
 
+  const calculateWeeklyExpenses = (txs) => {
+    const now = new Date();
+    const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay())); // Sunday
+    startOfWeek.setHours(0, 0, 0, 0);
+    return txs.reduce((acc, tx) => {
+      const txDate = new Date(tx.date);
+      if (tx.type === 'expense' && txDate >= startOfWeek) {
+        return acc + tx.amount;
+      }
+      return acc;
+    }, 0);
+  };
+
+  const calculateMonthlyExpenses = (txs) => {
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    return txs.reduce((acc, tx) => {
+      const txDate = new Date(tx.date);
+      if (tx.type === 'expense' && txDate >= startOfMonth) {
+        return acc + tx.amount;
+      }
+      return acc;
+    }, 0);
+  };
+
   const fetchTransactions = async () => {
     if (!userId) return;
     try {
@@ -105,11 +130,27 @@ function App() {
       case 'ledger':
         return (
           <>
-            <div className="glass-card fade-in" style={{ marginBottom: '2rem', textAlign: 'center' }}>
-              <p className="text-secondary">{t('home.totalBalance')}</p>
-              <h2 style={{ fontSize: '2.5rem', fontWeight: '700', marginTop: '0.5rem' }}>
-                {formatCurrency(transactions.reduce((acc, tx) => acc + (tx.type === 'income' ? tx.amount : -tx.amount), 0), localStorage.getItem('app_currency') || 'TWD')}
-              </h2>
+            <div className="glass-card fade-in" style={{ marginBottom: '2rem', padding: 0, overflow: 'hidden' }}>
+              <div style={{ display: 'flex', overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }} className="hide-scrollbar">
+                <div style={{ flex: '0 0 100%', scrollSnapAlign: 'start', padding: '1.5rem', textAlign: 'center' }}>
+                  <p className="text-secondary">{t('home.totalBalance')}</p>
+                  <h2 style={{ fontSize: '2.5rem', fontWeight: '700', marginTop: '0.5rem' }}>
+                    {formatCurrency(transactions.reduce((acc, tx) => acc + (tx.type === 'income' ? tx.amount : -tx.amount), 0), localStorage.getItem('app_currency') || 'TWD')}
+                  </h2>
+                </div>
+                <div style={{ flex: '0 0 100%', scrollSnapAlign: 'start', padding: '1.5rem', textAlign: 'center' }}>
+                  <p className="text-secondary">{t('home.weeklyExpenses') || '本週花費'}</p>
+                  <h2 style={{ fontSize: '2.5rem', fontWeight: '700', marginTop: '0.5rem' }}>
+                    {formatCurrency(calculateWeeklyExpenses(transactions), localStorage.getItem('app_currency') || 'TWD')}
+                  </h2>
+                </div>
+                <div style={{ flex: '0 0 100%', scrollSnapAlign: 'start', padding: '1.5rem', textAlign: 'center' }}>
+                  <p className="text-secondary">{t('home.monthlyExpenses') || '本月花費'}</p>
+                  <h2 style={{ fontSize: '2.5rem', fontWeight: '700', marginTop: '0.5rem' }}>
+                    {formatCurrency(calculateMonthlyExpenses(transactions), localStorage.getItem('app_currency') || 'TWD')}
+                  </h2>
+                </div>
+              </div>
             </div>
             <CalendarView transactions={transactions} t={t} />
           </>

@@ -34,6 +34,8 @@
   },
   "home": {
     "totalBalance": "總餘額",
-    "recentTransactions": "最近交易"
+    "recentTransactions": "最近交易",
+    "weeklyExpenses": "本週花費",
+    "monthlyExpenses": "本月花費"
   }
 }
