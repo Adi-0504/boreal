@@ -18,6 +18,13 @@ function App() {
   const [editingTransaction, setEditingTransaction] = useState(null);
   const { t, changeLanguage, lang } = useTranslation();
   const [accountFilter, setAccountFilter] = useState('all');
+  const [isNightMode, setIsNightMode] = useState(() => localStorage.getItem('night_mode') === 'true');
+
+  const toggleNightMode = () => {
+    const newVal = !isNightMode;
+    setIsNightMode(newVal);
+    localStorage.setItem('night_mode', newVal);
+  };
 
   const fetchTransactions = async () => {
     if (!userId) return;
@@ -74,12 +81,7 @@ function App() {
   };
 
   const getThemeClass = () => {
-    const hour = new Date().getHours();
-    if (hour >= 5 && hour < 8) return 'theme-dawn';
-    if (hour >= 8 && hour < 17) return 'theme-morning';
-    if (hour >= 17 && hour < 19) return 'theme-dusk';
-    if (hour >= 19 || hour < 5) return 'theme-night';
-    return 'theme-morning';
+    return isNightMode ? 'theme-deepsea' : 'theme-morning';
   };
 
   if (!userId) {
@@ -166,6 +168,16 @@ function App() {
                   <option value="ja">日本語</option>
                   <option value="es">Español</option>
                 </select>
+              </div>
+              <div>
+                <label className="text-secondary" style={{ display: 'block', marginBottom: '0.5rem' }}>{t('settings.theme') || 'Night Mode'}</label>
+                <button 
+                  onClick={toggleNightMode} 
+                  className={`btn ${isNightMode ? '' : 'btn-secondary'}`}
+                  style={{ width: '100%' }}
+                >
+                  {isNightMode ? (lang === 'zh-TW' ? '關閉夜間模式' : 'Disable Night Mode') : (lang === 'zh-TW' ? '開啟夜間模式' : 'Enable Night Mode')}
+                </button>
               </div>
               <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
                 <p className="text-secondary" style={{ marginBottom: '0.5rem' }}>User: {userId}</p>

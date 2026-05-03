@@ -147,3 +147,10 @@ input:focus, select:focus {
 .theme-noon { --bg-primary: #2980B9; --accent: #F1C40F; }
 .theme-dusk { --bg-primary: #2C3E50; --accent: #8E44AD; }
 .theme-night { --bg-primary: #161616; --accent: #2C3E50; }
+
+.theme-deepsea {
+  --bg-primary: #162655;
+  --accent: #5C7F7C;
+  --text-primary: #D0DAE8;
+  color: var(--text-primary);
+}
