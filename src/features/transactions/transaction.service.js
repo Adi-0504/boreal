@@ -6,7 +6,13 @@ export const transactionService = {
     const { data, error } = await supabase
       .from('transactions')
       .insert([{
-        ...transaction,
+        amount: transaction.amount,
+        type: transaction.type,
+        category: transaction.category,
+        account: transaction.account,
+        currency: transaction.currency,
+        date: transaction.date,
+        note: transaction.note,
         user_id: userId
       }])
       .select();
@@ -37,12 +43,20 @@ export const transactionService = {
 
   async updateTransaction(transaction) {
     const userId = localStorage.getItem('boreal_user_id') || 'guest';
-    const { id, user_id, ...updateData } = transaction; // Remove id from payload
+    const updateData = {
+        amount: transaction.amount,
+        type: transaction.type,
+        category: transaction.category,
+        account: transaction.account,
+        currency: transaction.currency,
+        date: transaction.date,
+        note: transaction.note
+    };
     
     const { data, error } = await supabase
       .from('transactions')
       .update(updateData)
-      .eq('id', id)
+      .eq('id', transaction.id)
       .eq('user_id', userId)
       .select();
 
