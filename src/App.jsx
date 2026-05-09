@@ -9,6 +9,7 @@ import { useTranslation } from './shared/hooks/useTranslation.js';
 import Icon from './shared/components/IconSystem';
 import { formatCurrency } from './shared/utils/formatCurrency.js';
 import { authService } from './features/auth/auth.service.js';
+import { exportToPDF } from './shared/utils/exportUtils.js';
 import './index.css';
 
 function App() {
@@ -326,6 +327,17 @@ function App() {
                   style={{ width: '100%' }}
                 >
                   {isNightMode ? (lang === 'zh-TW' ? '關閉夜間模式' : 'Disable Night Mode') : (lang === 'zh-TW' ? '開啟夜間模式' : 'Enable Night Mode')}
+                </button>
+              </div>
+              <div>
+                <label className="text-secondary" style={{ display: 'block', marginBottom: '0.5rem' }}>Data Management</label>
+                <button 
+                  onClick={() => exportToPDF(transactions, t, localStorage.getItem('app_currency') || 'TWD')} 
+                  className="btn btn-secondary"
+                  style={{ width: '100%', gap: '0.6rem' }}
+                >
+                  <Icon name="download" size={18} />
+                  {lang === 'zh-TW' ? '匯出 PDF 報表' : 'Export PDF Report'}
                 </button>
               </div>
               <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
