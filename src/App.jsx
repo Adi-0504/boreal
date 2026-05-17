@@ -217,37 +217,14 @@ function App() {
               <button onClick={toggleNightMode} className="btn btn-secondary">{isNightMode ? 'Light Mode' : 'Night Mode'}</button>
               
               <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
-                <label className="text-secondary">Categories</label>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>
-                  {userCategories.map(cat => (
-                    <div key={cat.id} style={{ position: 'relative' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', background: 'var(--surface)', padding: '0.6rem 1rem', borderRadius: '10px' }}>
-                        <button onClick={() => setActiveIconPicker(activeIconPicker === cat.id ? null : cat.id)} className="btn-secondary" style={{ padding: '0.4rem', borderRadius: '8px' }}>
-                          <Icon name={cat.icon} size={18} />
-                        </button>
-                        <input 
-                          type="text" 
-                          value={cat.name} 
-                          onChange={(e) => setUserCategories(userCategories.map(c => c.id === cat.id ? { ...c, name: e.target.value } : c))}
-                          style={{ background: 'none', border: 'none', color: 'var(--text-primary)' }}
-                        />
-                      </div>
-                      {activeIconPicker === cat.id && (
-                        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(10px)' }} onClick={() => setActiveIconPicker(null)}>
-                          <div className="glass-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.8rem', maxWidth: '340px' }} onClick={e => e.stopPropagation()}>
-                            {['food', 'coffee', 'grocery', 'transport', 'shopping', 'phone', 'utilities', 'home_rent', 'health', 'beauty', 'fitness', 'entertainment', 'education', 'gift', 'investment', 'travel', 'pet', 'subscription', 'work', 'other'].map(iconName => (
-                              <button key={iconName} className="btn-secondary" onClick={() => { setUserCategories(userCategories.map(c => c.id === cat.id ? { ...c, icon: iconName } : c)); setActiveIconPicker(null); }}>
-                                <Icon name={iconName} size={24} />
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                  <button onClick={() => setUserCategories([...userCategories, { id: `custom_${Date.now()}`, name: 'New', icon: 'other' }])} className="btn btn-secondary">+ Add</button>
-                  <button onClick={() => { if (window.confirm('Reset?')) setUserCategories([{ id: 'food', name: '飲食', icon: 'food' }, { id: 'transport', name: '交通', icon: 'transport' }, { id: 'shopping', name: '購物', icon: 'shopping' }, { id: 'entertainment', name: '娛樂', icon: 'entertainment' }, { id: 'health', name: '醫療', icon: 'health' }, { id: 'other', name: '其他', icon: 'other' }]); }} className="btn btn-secondary" style={{ color: '#FF8A8A' }}>↺ Reset</button>
-                </div>
+                <button 
+                  onClick={() => exportToPDF(transactions, t)} 
+                  className="btn btn-secondary" 
+                  style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+                >
+                  <Icon name="save" size={20} />
+                  匯出 PDF 報表
+                </button>
               </div>
 
               <button onClick={handleLogout} className="btn btn-secondary" style={{ color: '#FF8A8A' }}>Sign Out</button>
