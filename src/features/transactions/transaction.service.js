@@ -2,7 +2,9 @@ import { supabase } from '../../supabaseClient';
 
 export const transactionService = {
   async addTransaction(transaction) {
-    const userId = localStorage.getItem('boreal_user_id') || 'guest';
+    const { data: { session } } = await supabase.auth.getSession();
+    const userId = session?.user?.id || 'guest';
+
     const { data, error } = await supabase
       .from('transactions')
       .insert([{
@@ -25,7 +27,9 @@ export const transactionService = {
   },
 
   async getTransactions() {
-    const userId = localStorage.getItem('boreal_user_id') || 'guest';
+    const { data: { session } } = await supabase.auth.getSession();
+    const userId = session?.user?.id || 'guest';
+
     const { data, error } = await supabase
       .from('transactions')
       .select('*')
@@ -42,7 +46,9 @@ export const transactionService = {
   },
 
   async updateTransaction(transaction) {
-    const userId = localStorage.getItem('boreal_user_id') || 'guest';
+    const { data: { session } } = await supabase.auth.getSession();
+    const userId = session?.user?.id || 'guest';
+
     const updateData = {
         amount: transaction.amount,
         type: transaction.type,
