@@ -12,7 +12,12 @@
     "date": "日付",
     "account": "アカウント",
     "currency": "通貨",
-    "settings": "設定"
+    "settings": "設定",
+    "loading": "読み込み中...",
+    "search": "検索...",
+    "all": "すべて",
+    "done": "完了",
+    "note": "メモ（任意）"
   },
   "accounts": {
     "cash": "現金",
@@ -30,10 +35,41 @@
   "settings": {
     "language": "言語",
     "defaultCurrency": "デフォルト通貨",
-    "theme": "テーマ"
+    "theme": "テーマ",
+    "lightMode": "ライトモード",
+    "nightMode": "ナイトモード",
+    "exportPdf": "PDFレポート出力",
+    "signOut": "ログアウト"
   },
   "home": {
-    "totalBalance": "合計残高",
-    "recentTransactions": "最近の取引"
+    "totalExpenses": "合計支出",
+    "recentTransactions": "最近の取引",
+    "weeklyExpenses": "今週の支出",
+    "monthlyExpenses": "今月の支出",
+    "appTitle": "Boreal",
+    "appSubtitle": "フォレストトラッカー",
+    "loginWithGoogle": "Googleでログイン"
+  },
+  "categoryManage": {
+    "title": "カテゴリー管理",
+    "selectIcon": "アイコンを選択",
+    "newCategory": "新しいカテゴリー",
+    "addCategory": "+ カテゴリーを追加"
+  },
+  "nav": {
+    "ledger": "帳簿",
+    "accounts": "アカウント",
+    "add": "追加",
+    "charts": "チャート",
+    "settings": "設定"
+  },
+  "calendar": {
+    "today": "今日",
+    "records": "の記録",
+    "noRecords": "記録なし"
+  },
+  "charts": {
+    "notEnoughData": "チャートを生成するためのデータが不足しています",
+    "expenseStructure": "支出構成"
   }
 }

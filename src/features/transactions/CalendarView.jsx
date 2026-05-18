@@ -117,12 +117,12 @@ const CalendarView = ({ transactions, t }) => {
       {/* Daily Transactions */}
       <div className="fade-in">
         <h3 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '1rem', paddingLeft: '0.5rem' }}>
-          {selectedDate === new Date().toISOString().split('T')[0] ? '今天' : selectedDate} 紀錄
+          {selectedDate === new Date().toISOString().split('T')[0] ? t('calendar.today') : selectedDate} {t('calendar.records')}
         </h3>
         
         {selectedDayTransactions.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }} className="glass-card">
-            沒有記錄
+            {t('calendar.noRecords')}
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>

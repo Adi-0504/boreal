@@ -22,7 +22,7 @@ const ChartSection = ({ transactions, t }) => {
   if (transactions.length === 0) {
     return (
       <div className="glass-card" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
-        目前沒有足夠數據生成圖表
+        {t('charts.notEnoughData')}
       </div>
     );
   }
@@ -30,7 +30,7 @@ const ChartSection = ({ transactions, t }) => {
   return (
     <div className="space-y-6 fade-in" style={{ paddingBottom: '100px' }}>
       <div className="glass-card">
-        <h3 style={{ marginBottom: '1.5rem', fontSize: '1rem', fontWeight: '600' }}>支出結構</h3>
+        <h3 style={{ marginBottom: '1.5rem', fontSize: '1rem', fontWeight: '600' }}>{t('charts.expenseStructure')}</h3>
         <div style={{ height: '300px', width: '100%' }}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>

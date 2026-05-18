@@ -22,6 +22,7 @@ function App() {
   const [transactions, setTransactions] = useState([]);
   const [editingTransaction, setEditingTransaction] = useState(null);
   const { t, changeLanguage, lang } = useTranslation();
+  const [expenseViewIndex, setExpenseViewIndex] = useState(0);
   const [accountFilter, setAccountFilter] = useState('all');
   const [isNightMode, setIsNightMode] = useState(() => localStorage.getItem('night_mode') === 'true');
   const [isEditingName, setIsEditingName] = useState(false);
@@ -117,7 +118,7 @@ function App() {
 
   if (authLoading) return (
     <div className={getThemeClass()} style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <p className="text-secondary">Loading...</p>
+      <p className="text-secondary">{t('common.loading')}</p>
     </div>
   );
 
@@ -126,10 +127,26 @@ function App() {
       <div className={getThemeClass()} style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div className="bg-evolve" />
         <div className="glass-card fade-in" style={{ width: '90%', maxWidth: '340px', textAlign: 'center', zIndex: 1 }}>
-          <h1>Boreal</h1>
-          <p className="text-secondary" style={{ marginBottom: '2rem' }}>Forest Tracker</p>
+          <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'center', gap: '4px' }}>
+            {"Welcome".split('').map((char, index) => (
+              <span 
+                key={index} 
+                style={{ 
+                  fontSize: '2rem', 
+                  fontWeight: '700', 
+                  color: 'var(--text-primary)',
+                  opacity: 0,
+                  animation: `fadeInUp 0.5s ease forwards ${index * 0.1}s`
+                }}
+              >
+                {char}
+              </span>
+            ))}
+          </div>
+          <h1>{t('home.appTitle')}</h1>
+          <p className="text-secondary" style={{ marginBottom: '2rem' }}>{t('home.appSubtitle')}</p>
           <button onClick={handleGoogleLogin} className="btn" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}>
-            Continue with Google
+            {t('home.loginWithGoogle')}
           </button>
         </div>
       </div>
@@ -139,12 +156,37 @@ function App() {
   const renderContent = () => {
     switch (activeTab) {
       case 'ledger': {
+        const d = new Date();
+        const startOfMonth = new Date(d.getFullYear(), d.getMonth(), 1).toISOString().split('T')[0];
+        const day = d.getDay();
+        const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+        const startOfWeek = new Date(new Date().setDate(diff)).toISOString().split('T')[0];
+
+        const totalExpenses = transactions.reduce((acc, tx) => acc + (tx.type === 'expense' ? tx.amount : 0), 0);
+        const weeklyExpenses = transactions.reduce((acc, tx) => acc + (tx.type === 'expense' && tx.date >= startOfWeek ? tx.amount : 0), 0);
+        const monthlyExpenses = transactions.reduce((acc, tx) => acc + (tx.type === 'expense' && tx.date >= startOfMonth ? tx.amount : 0), 0);
+
+        const views = [
+          { label: t('home.totalExpenses'), value: totalExpenses },
+          { label: t('home.monthlyExpenses'), value: monthlyExpenses },
+          { label: t('home.weeklyExpenses'), value: weeklyExpenses }
+        ];
+
         return (
           <>
-            <div className="glass-card fade-in" style={{ marginBottom: '2rem', textAlign: 'center' }}>
-              <p className="text-secondary">{t('home.totalExpenses')}</p>
+            <div 
+              className="glass-card fade-in" 
+              style={{ marginBottom: '2rem', textAlign: 'center', cursor: 'pointer', userSelect: 'none' }}
+              onClick={() => setExpenseViewIndex((prev) => (prev + 1) % views.length)}
+            >
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '4px', marginBottom: '8px' }}>
+                {views.map((_, i) => (
+                  <div key={i} style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: i === expenseViewIndex ? 'var(--accent)' : 'var(--border)' }} />
+                ))}
+              </div>
+              <p className="text-secondary">{views[expenseViewIndex].label}</p>
               <h2 style={{ fontSize: '2.5rem', fontWeight: '700' }}>
-                {formatCurrency(transactions.reduce((acc, tx) => acc + (tx.type === 'expense' ? tx.amount : 0), 0), 'TWD')}
+                {formatCurrency(views[expenseViewIndex].value, 'TWD')}
               </h2>
             </div>
             <CalendarView transactions={transactions} t={t} />
@@ -158,13 +200,18 @@ function App() {
           return matchesSearch && matchesCategory;
         });
 
+        const getCatName = (cat) => {
+          const trans = t(`categories.${cat.id}`);
+          return trans !== `categories.${cat.id}` && ['飲食','交通','購物','娛樂','醫療','其他','健康'].includes(cat.name) ? trans : cat.name;
+        };
+
         return (
           <div className="fade-in">
             <div style={{ marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
               <div style={{ position: 'relative' }}>
                 <input 
                   type="text" 
-                  placeholder="搜尋..."
+                  placeholder={t('common.search')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   style={{ paddingLeft: '2.8rem' }}
@@ -175,14 +222,14 @@ function App() {
               </div>
               
               <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem' }} className="hide-scrollbar">
-                <button className={`btn ${categoryFilter === 'all' ? '' : 'btn-secondary'}`} onClick={() => setCategoryFilter('all')}>All</button>
+                <button className={`btn ${categoryFilter === 'all' ? '' : 'btn-secondary'}`} onClick={() => setCategoryFilter('all')}>{t('common.all')}</button>
                 {userCategories.map(cat => (
-                  <button key={cat.id} className={`btn ${categoryFilter === cat.id ? '' : 'btn-secondary'}`} onClick={() => setCategoryFilter(cat.id)}>{cat.name}</button>
+                  <button key={cat.id} className={`btn ${categoryFilter === cat.id ? '' : 'btn-secondary'}`} onClick={() => setCategoryFilter(cat.id)}>{getCatName(cat)}</button>
                 ))}
               </div>
             </div>
 
-            <TransactionList transactions={filteredTransactions} onDelete={handleDelete} onEdit={handleEdit} categories={userCategories} />
+            <TransactionList transactions={filteredTransactions} onDelete={handleDelete} onEdit={handleEdit} categories={userCategories} t={t} />
           </div>
         );
       }
@@ -195,6 +242,7 @@ function App() {
               categories={userCategories}
               setCategories={setUserCategories}
               onCancel={() => { setEditingTransaction(null); setActiveTab('ledger'); }}
+              t={t}
             />
           </div>
         );
@@ -205,16 +253,18 @@ function App() {
       case 'settings': {
         return (
           <div className="glass-card fade-in" style={{ marginBottom: '1.5rem' }}>
-            <h3>{t('common.settings')}</h3>
+            <h3>{t('nav.settings')}</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '1.5rem' }}>
               <div>
-                <label className="text-secondary">Language</label>
+                <label className="text-secondary">{t('settings.language')}</label>
                 <select value={lang} onChange={(e) => changeLanguage(e.target.value)}>
                   <option value="zh-TW">繁體中文</option>
                   <option value="en">English</option>
+                  <option value="ja">日本語</option>
+                  <option value="es">Español</option>
                 </select>
               </div>
-              <button onClick={toggleNightMode} className="btn btn-secondary">{isNightMode ? 'Light Mode' : 'Night Mode'}</button>
+              <button onClick={toggleNightMode} className="btn btn-secondary">{isNightMode ? t('settings.lightMode') : t('settings.nightMode')}</button>
               
               <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
                 <button 
@@ -223,11 +273,11 @@ function App() {
                   style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
                 >
                   <Icon name="save" size={20} />
-                  匯出 PDF 報表
+                  {t('settings.exportPdf')}
                 </button>
               </div>
 
-              <button onClick={handleLogout} className="btn btn-secondary" style={{ color: '#FF8A8A' }}>Sign Out</button>
+              <button onClick={handleLogout} className="btn btn-secondary" style={{ color: '#FF8A8A' }}>{t('settings.signOut')}</button>
             </div>
           </div>
         );
@@ -242,15 +292,15 @@ function App() {
       <div style={{ maxWidth: '500px', margin: '0 auto', padding: '1.5rem', position: 'relative', zIndex: 1 }}>
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
           <div>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: '600' }}>Boreal</h1>
-            <p className="text-secondary">Forest Tracker</p>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: '600' }}>{t('home.appTitle')}</h1>
+            <p className="text-secondary">{t('home.appSubtitle')}</p>
           </div>
           <button className="btn btn-secondary" style={{ padding: '0.6rem' }} onClick={() => setActiveTab('settings')}>
             <Icon name="settings" size={20} />
           </button>
         </header>
         <main style={{ paddingBottom: '100px' }}>{renderContent()}</main>
-        <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+        <BottomNav activeTab={activeTab} onTabChange={setActiveTab} t={t} />
       </div>
     </div>
   );

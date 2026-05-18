@@ -12,7 +12,12 @@
     "date": "日期",
     "account": "帳戶",
     "currency": "幣別",
-    "settings": "設定"
+    "settings": "設定",
+    "loading": "載入中...",
+    "search": "搜尋...",
+    "all": "全部",
+    "done": "完成",
+    "note": "備註 (選填)"
   },
   "accounts": {
     "cash": "現金",
@@ -30,12 +35,41 @@
   "settings": {
     "language": "語言",
     "defaultCurrency": "預設幣別",
-    "theme": "主題"
+    "theme": "主題",
+    "lightMode": "淺色模式",
+    "nightMode": "深色模式",
+    "exportPdf": "匯出 PDF 報表",
+    "signOut": "登出"
   },
   "home": {
     "totalExpenses": "總花費",
     "recentTransactions": "最近交易",
     "weeklyExpenses": "本週花費",
-    "monthlyExpenses": "本月花費"
+    "monthlyExpenses": "本月花費",
+    "appTitle": "Boreal",
+    "appSubtitle": "森林記帳",
+    "loginWithGoogle": "使用 Google 登入"
+  },
+  "categoryManage": {
+    "title": "類別管理",
+    "selectIcon": "選擇圖示",
+    "newCategory": "新類別",
+    "addCategory": "+ 新增類別"
+  },
+  "nav": {
+    "ledger": "帳本",
+    "accounts": "帳戶",
+    "add": "記一筆",
+    "charts": "圖表",
+    "settings": "設定"
+  },
+  "calendar": {
+    "today": "今天",
+    "records": "紀錄",
+    "noRecords": "沒有記錄"
+  },
+  "charts": {
+    "notEnoughData": "目前沒有足夠數據生成圖表",
+    "expenseStructure": "支出結構"
   }
 }

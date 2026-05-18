@@ -12,7 +12,12 @@
     "date": "Fecha",
     "account": "Cuenta",
     "currency": "Moneda",
-    "settings": "Ajustes"
+    "settings": "Ajustes",
+    "loading": "Cargando...",
+    "search": "Buscar...",
+    "all": "Todo",
+    "done": "Hecho",
+    "note": "Nota (Opcional)"
   },
   "accounts": {
     "cash": "Efectivo",
@@ -30,10 +35,41 @@
   "settings": {
     "language": "Idioma",
     "defaultCurrency": "Moneda predeterminada",
-    "theme": "Tema"
+    "theme": "Tema",
+    "lightMode": "Modo Claro",
+    "nightMode": "Modo Oscuro",
+    "exportPdf": "Exportar PDF",
+    "signOut": "Cerrar sesión"
   },
   "home": {
-    "totalBalance": "Saldo total",
-    "recentTransactions": "Transacciones recientes"
+    "totalExpenses": "Gastos Totales",
+    "recentTransactions": "Transacciones recientes",
+    "weeklyExpenses": "Gastos Semanales",
+    "monthlyExpenses": "Gastos Mensuales",
+    "appTitle": "Boreal",
+    "appSubtitle": "Rastreador de Bosque",
+    "loginWithGoogle": "Continuar con Google"
+  },
+  "categoryManage": {
+    "title": "Gestionar Categorías",
+    "selectIcon": "Seleccionar Icono",
+    "newCategory": "Nueva Categoría",
+    "addCategory": "+ Añadir Categoría"
+  },
+  "nav": {
+    "ledger": "Libro",
+    "accounts": "Cuentas",
+    "add": "Añadir",
+    "charts": "Gráficos",
+    "settings": "Ajustes"
+  },
+  "calendar": {
+    "today": "Hoy",
+    "records": "Registros",
+    "noRecords": "No hay registros"
+  },
+  "charts": {
+    "notEnoughData": "No hay suficientes datos para generar gráficos",
+    "expenseStructure": "Estructura de Gastos"
   }
 }

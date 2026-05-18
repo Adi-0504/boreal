@@ -12,7 +12,12 @@
     "date": "Date",
     "account": "Account",
     "currency": "Currency",
-    "settings": "Settings"
+    "settings": "Settings",
+    "loading": "Loading...",
+    "search": "Search...",
+    "all": "All",
+    "done": "Done",
+    "note": "Note (Optional)"
   },
   "accounts": {
     "cash": "Cash",
@@ -30,12 +35,41 @@
   "settings": {
     "language": "Language",
     "defaultCurrency": "Default Currency",
-    "theme": "Theme"
+    "theme": "Theme",
+    "lightMode": "Light Mode",
+    "nightMode": "Night Mode",
+    "exportPdf": "Export PDF Report",
+    "signOut": "Sign Out"
   },
   "home": {
     "totalExpenses": "Total Expenses",
     "recentTransactions": "Recent Transactions",
     "weeklyExpenses": "Weekly Expenses",
-    "monthlyExpenses": "Monthly Expenses"
+    "monthlyExpenses": "Monthly Expenses",
+    "appTitle": "Boreal",
+    "appSubtitle": "Forest Tracker",
+    "loginWithGoogle": "Continue with Google"
+  },
+  "categoryManage": {
+    "title": "Manage Categories",
+    "selectIcon": "Select Icon",
+    "newCategory": "New Category",
+    "addCategory": "+ Add Category"
+  },
+  "nav": {
+    "ledger": "Ledger",
+    "accounts": "Accounts",
+    "add": "Add",
+    "charts": "Charts",
+    "settings": "Settings"
+  },
+  "calendar": {
+    "today": "Today",
+    "records": "Records",
+    "noRecords": "No records"
+  },
+  "charts": {
+    "notEnoughData": "Not enough data to generate charts",
+    "expenseStructure": "Expense Structure"
   }
 }

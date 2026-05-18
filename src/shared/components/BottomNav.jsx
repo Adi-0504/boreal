@@ -1,13 +1,13 @@
 import React from 'react';
 import Icon from './IconSystem';
+const BottomNav = ({ activeTab, onTabChange, t }) => {
 
-const BottomNav = ({ activeTab, onTabChange }) => {
   const tabs = [
-    { id: 'ledger', icon: 'home', label: '帳本' },
-    { id: 'accounts', icon: 'transport', label: '帳戶' },
-    { id: 'add', icon: 'plus', label: '記一筆', isCenter: true },
-    { id: 'charts', icon: 'food', label: '圖表' },
-    { id: 'settings', icon: 'settings', label: '設定' },
+    { id: 'ledger', icon: 'home', label: t('nav.ledger') },
+    { id: 'accounts', icon: 'transport', label: t('nav.accounts') },
+    { id: 'add', icon: 'plus', label: t('nav.add'), isCenter: true },
+    { id: 'charts', icon: 'food', label: t('nav.charts') },
+    { id: 'settings', icon: 'settings', label: t('nav.settings') },
   ];
 
   return (

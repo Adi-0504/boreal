@@ -1,11 +1,8 @@
 import React, { memo } from 'react';
-import { useTranslation } from '../../shared/hooks/useTranslation';
 import { formatCurrency } from '../../shared/utils/formatCurrency';
 import Icon from '../../shared/components/IconSystem';
 
-const TransactionList = memo(({ transactions, onDelete, onEdit, categories }) => {
-  const { t } = useTranslation();
-
+const TransactionList = memo(({ transactions, onDelete, onEdit, categories, t }) => {
   if (transactions.length === 0) {
     return (
       <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>
@@ -16,10 +13,15 @@ const TransactionList = memo(({ transactions, onDelete, onEdit, categories }) =>
 
   const getCategoryInfo = (catId) => {
     const cat = categories?.find(c => c.id === catId);
-    if (cat) return cat;
+    if (cat) {
+      const trans = t(`categories.${cat.id}`);
+      const isDefault = ['飲食','交通','購物','娛樂','醫療','其他','健康'].includes(cat.name);
+      return { ...cat, name: (trans !== `categories.${cat.id}` && isDefault) ? trans : cat.name };
+    }
     // Fallback to translation for legacy/built-in categories
+    const fallbackTrans = t(`categories.${catId}`);
     return { 
-      name: t(`categories.${catId}`) || catId, 
+      name: fallbackTrans !== `categories.${catId}` ? fallbackTrans : catId, 
       icon: catId 
     };
   };

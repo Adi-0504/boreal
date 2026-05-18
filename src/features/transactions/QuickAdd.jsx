@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useTranslation } from '../../shared/hooks/useTranslation';
+
 import { transactionService } from './transaction.service';
 import Icon from '../../shared/components/IconSystem';
 import { getSupportedCurrencies } from '../../shared/utils/formatCurrency';
 
-export default function QuickAdd({ onAdded, editingTransaction, onCancel, categories, setCategories }) {
-  const { t } = useTranslation();
+export default function QuickAdd({ onAdded, editingTransaction, onCancel, categories, setCategories, t }) {
   const [amount, setAmount] = useState('');
   const [type, setType] = useState('expense');
   const [category, setCategory] = useState(categories[0]?.id || 'food');
@@ -130,7 +129,7 @@ export default function QuickAdd({ onAdded, editingTransaction, onCancel, catego
             gap: '0.8rem',
             border: '1px dashed var(--border)'
           }}>
-            <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--text-secondary)' }}>類別管理</div>
+            <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--text-secondary)' }}>{t('categoryManage.title')}</div>
             {categories.map(cat => (
               <div key={cat.id} style={{ position: 'relative' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
@@ -186,7 +185,7 @@ export default function QuickAdd({ onAdded, editingTransaction, onCancel, catego
                       }} 
                       onClick={e => e.stopPropagation()}
                     >
-                      <div style={{ gridColumn: 'span 5', textAlign: 'center', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.9rem' }}>選擇圖示</div>
+                      <div style={{ gridColumn: 'span 5', textAlign: 'center', marginBottom: '0.5rem', fontWeight: '500', fontSize: '0.9rem' }}>{t('categoryManage.selectIcon')}</div>
                       {iconOptions.map(iconName => (
                         <button
                           key={iconName}
@@ -215,7 +214,7 @@ export default function QuickAdd({ onAdded, editingTransaction, onCancel, catego
                         onClick={() => setActiveIconPicker(null)}
                         style={{ gridColumn: 'span 5', marginTop: '1rem', background: 'var(--surface)', border: 'none', color: 'var(--text-primary)', padding: '0.6rem', borderRadius: '12px', fontSize: '0.85rem', cursor: 'pointer' }}
                       >
-                        完成
+                        {t('common.done')}
                       </button>
                     </div>
                   </div>
@@ -226,12 +225,12 @@ export default function QuickAdd({ onAdded, editingTransaction, onCancel, catego
               type="button"
               onClick={() => {
                 const newId = `custom_${Date.now()}`;
-                setCategories([...categories, { id: newId, name: '新類別', icon: 'other' }]);
+                setCategories([...categories, { id: newId, name: t('categoryManage.newCategory'), icon: 'other' }]);
               }}
               className="btn btn-secondary"
               style={{ padding: '0.4rem', fontSize: '0.75rem' }}
             >
-              + 新增類別
+              {t('categoryManage.addCategory')}
             </button>
           </div>
         )}
@@ -248,7 +247,7 @@ export default function QuickAdd({ onAdded, editingTransaction, onCancel, catego
         <div style={{ position: 'relative' }}>
           <input
             type="text"
-            placeholder="備註 (選填)"
+            placeholder={t('common.note')}
             value={note}
             onChange={(e) => setNote(e.target.value)}
             style={{ fontSize: '0.9rem' }}
